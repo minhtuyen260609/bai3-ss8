@@ -1,0 +1,50 @@
+1. Input / Output
+Input:
+- withdrawAmount: so tien khach hang muon rut ve ngan hang lien ket
+- Kieu du lieu de xu ly: Long
+Output:
+- Hop le:
+  withdrawAmount >= 50000
+  withdrawAmount la boi so cua 10000
+- Khong hop le:
+  null
+  so am
+  nho hon 50000
+  khong phai boi so cua 10000
+
+2. Giai phap de xuat
+- Khong viet if-else trong Controller
+- Dung Bean Validation de tach logic validate ra khoi Controller
+- Tao custom annotation: @MultipleOfTenThousand
+- Tao class validator: MultipleOfTenThousandValidator
+- Trong DTO ket hop:
+  @NotNull
+  @Positive
+  @Min(50000)
+  @MultipleOfTenThousand
+
+3. Cach xu ly null theo Best Practice
+- Trong custom validator, neu value == null thi tra ve true
+- Ly do: null se do annotation @NotNull xu ly rieng
+- Cach nay giup moi annotation chi chiu trach nhiem 1 loai loi
+
+4. Pseudocode validator
+Function isValid(value):
+    If value == null:
+        Return true
+
+    If value % 10000 == 0:
+        Return true
+
+    Return false
+
+5. Luong kiem tra nghiep vu
+Buoc 1: Nhan withdrawAmount tu request
+Buoc 2: Gan vao WithdrawRequestDto
+Buoc 3: Bean Validation tu dong kiem tra:
+        - Co null khong?
+        - Co la so duong khong?
+        - Co >= 50000 khong?
+        - Co la boi so cua 10000 khong?
+Buoc 4: Neu co loi thi tra thong bao validation
+Buoc 5: Neu hop le thi cho phep xu ly rut tien
